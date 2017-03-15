@@ -12,11 +12,13 @@ import android.support.v7.widget.Toolbar;
 import java.util.ArrayList;
 import java.util.List;
 
+import dank.com.translator.Fragments.HistoryFragment;
 import dank.com.translator.Fragments.Translate;
+import dank.com.translator.Fragments.dummy.DummyContent;
 
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity
+        implements HistoryFragment.OnListFragmentInteractionListener{
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -42,9 +44,10 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new Translate(), "Translate");
-
+        adapter.addFrag(new HistoryFragment(), "History");
         viewPager.setAdapter(adapter);
     }
+
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
@@ -74,4 +77,11 @@ public class MainActivity extends AppCompatActivity {
             return mFragmentTitleList.get(position);
         }
     }
+
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
+    }
+
 }
