@@ -12,13 +12,15 @@ import android.support.v7.widget.Toolbar;
 import java.util.ArrayList;
 import java.util.List;
 
+import dank.com.translator.Fragments.FavoritesFragment;
 import dank.com.translator.Fragments.HistoryFragment;
 import dank.com.translator.Fragments.Translate;
 import dank.com.translator.Fragments.dummy.DummyContent;
 
 
 public class MainActivity extends AppCompatActivity
-        implements HistoryFragment.OnListFragmentInteractionListener{
+        implements HistoryFragment.OnListFragmentInteractionListener,
+                   FavoritesFragment.OnListFragmentInteractionListener {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -45,6 +47,8 @@ public class MainActivity extends AppCompatActivity
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new Translate(), "Translate");
         adapter.addFrag(new HistoryFragment(), "History");
+        adapter.addFrag(new FavoritesFragment(), "Favorites");
+
         viewPager.setAdapter(adapter);
     }
 
@@ -79,7 +83,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    @Override
+
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
 
     }
