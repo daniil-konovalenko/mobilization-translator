@@ -12,10 +12,10 @@ import android.support.v7.widget.Toolbar;
 import java.util.ArrayList;
 import java.util.List;
 
-import dank.com.translator.fragments.FavoritesFragment;
-import dank.com.translator.fragments.HistoryFragment;
-import dank.com.translator.fragments.TranslateFragment;
-import dank.com.translator.fragments.dummy.DummyContent;
+import dank.com.translator.fragment.FavoritesFragment;
+import dank.com.translator.fragment.HistoryFragment;
+import dank.com.translator.fragment.TranslateFragment;
+import dank.com.translator.fragment.dummy.DummyContent;
 
 
 public class MainActivity extends AppCompatActivity

@@ -1,4 +1,4 @@
-package dank.com.translator.fragments;
+package dank.com.translator.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

@@ -1,4 +1,4 @@
-package dank.com.translator.fragments.dummy;
+package dank.com.translator.fragment.dummy;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package dank.com.translator.fragments;
+package dank.com.translator.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,9 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import dank.com.translator.R;
-import dank.com.translator.fragments.dummy.DummyContent;
-import dank.com.translator.fragments.dummy.DummyContent.DummyItem;
-import dank.com.translator.adapters.FavoritesEntryRecyclerViewAdapter;
+import dank.com.translator.fragment.dummy.DummyContent;
+import dank.com.translator.fragment.dummy.DummyContent.DummyItem;
+import dank.com.translator.adapter.FavoritesEntryRecyclerViewAdapter;
 
 /**
  * A fragment representing a list of Items.
