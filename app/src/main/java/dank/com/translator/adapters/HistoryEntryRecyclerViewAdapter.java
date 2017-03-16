@@ -1,4 +1,4 @@
-package dank.com.translator.Fragments;
+package dank.com.translator.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,10 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import dank.com.translator.Fragments.FavoritesFragment.OnListFragmentInteractionListener;
-import dank.com.translator.Fragments.dummy.DummyContent.DummyItem;
+import dank.com.translator.fragments.HistoryFragment.OnListFragmentInteractionListener;
+import dank.com.translator.fragments.dummy.DummyContent.DummyItem;
 import dank.com.translator.R;
-
 
 import java.util.List;
 
@@ -18,12 +17,12 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class FavoritesEntryRecyclerViewAdapter extends RecyclerView.Adapter<FavoritesEntryRecyclerViewAdapter.ViewHolder> {
+public class HistoryEntryRecyclerViewAdapter extends RecyclerView.Adapter<HistoryEntryRecyclerViewAdapter.ViewHolder> {
 
     private final List<DummyItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public FavoritesEntryRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public HistoryEntryRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -31,7 +30,7 @@ public class FavoritesEntryRecyclerViewAdapter extends RecyclerView.Adapter<Favo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_favoriteentry, parent, false);
+                .inflate(R.layout.fragment_historyentry, parent, false);
         return new ViewHolder(view);
     }
 
