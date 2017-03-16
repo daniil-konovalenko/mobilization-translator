@@ -12,11 +12,11 @@ import android.widget.TextView;
 import dank.com.translator.R;
 
 
-public class Translate extends Fragment {
+public class TranslateFragment extends Fragment {
 
 
 
-    public Translate() {
+    public TranslateFragment() {
         // Required empty public constructor
     }
 

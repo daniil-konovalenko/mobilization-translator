@@ -14,7 +14,7 @@ import java.util.List;
 
 import dank.com.translator.Fragments.FavoritesFragment;
 import dank.com.translator.Fragments.HistoryFragment;
-import dank.com.translator.Fragments.Translate;
+import dank.com.translator.Fragments.TranslateFragment;
 import dank.com.translator.Fragments.dummy.DummyContent;
 
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new Translate(), "Translate");
+        adapter.addFrag(new TranslateFragment(), "TranslateFragment");
         adapter.addFrag(new HistoryFragment(), "History");
         adapter.addFrag(new FavoritesFragment(), "Favorites");
 
