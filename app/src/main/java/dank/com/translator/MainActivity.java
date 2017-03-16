@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new TranslateFragment(), "TranslateFragment");
+        adapter.addFrag(new TranslateFragment(), "Translate");
         adapter.addFrag(new HistoryFragment(), "History");
         adapter.addFrag(new FavoritesFragment(), "Favorites");
 
