@@ -9,12 +9,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+
+import dank.com.translator.App;
 import dank.com.translator.R;
+import dank.com.translator.yandextranslale.model.Translation;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class TranslateFragment extends Fragment {
 
-
+    public String API_KEY;
 
     public TranslateFragment() {
         // Required empty public constructor
@@ -22,6 +28,7 @@ public class TranslateFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        API_KEY = getString(R.string.api_key);
         super.onCreate(savedInstanceState);
     }
 
@@ -39,18 +46,23 @@ public class TranslateFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String toTranslate = textToTranslateView.getText().toString();
-                String translated = getTranslation(toTranslate);
-                translatedView.setText(translated);
+                Call<Translation> call = App.getApi().translate(API_KEY, toTranslate, "ru");
+                call.enqueue(new Callback<Translation>() {
+                    @Override
+                    public void onResponse(Call<Translation> call, Response<Translation> response) {
+                        String translated = response.body().getText().toString();
+                        translatedView.setText(translated);
+                    }
+                    @Override
+                    public void onFailure(Call<Translation> call, Throwable t) {
+                        translatedView.setText(getString(R.string.error, t.getMessage()));
+                    }
+                });
+
             }
         });
 
         return view;
     }
 
-    // Stub method to retrieve "translated" string.
-    // To be replaced with call to Yandex.Translator API.
-
-    public String getTranslation(String string){
-        return "Translated: " + string;
-    }
 }

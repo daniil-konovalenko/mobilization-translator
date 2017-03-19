@@ -5,4 +5,5 @@
     <string name="title_notifications">Notifications</string>
 
     <string name="buttonTranslateText">Translate</string>
+    <string name="error">Error: %1$s</string>
 </resources>
