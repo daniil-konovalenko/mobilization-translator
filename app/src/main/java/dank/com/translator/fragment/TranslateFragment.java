@@ -20,7 +20,6 @@ import retrofit2.Response;
 
 public class TranslateFragment extends Fragment {
 
-    public String API_KEY;
 
     public TranslateFragment() {
         // Required empty public constructor
@@ -28,7 +27,6 @@ public class TranslateFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        API_KEY = getString(R.string.api_key);
         super.onCreate(savedInstanceState);
     }
 
@@ -46,7 +44,7 @@ public class TranslateFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String toTranslate = textToTranslateView.getText().toString();
-                Call<Translation> call = App.getApi().translate(API_KEY, toTranslate, "ru");
+                Call<Translation> call = App.getApi().translate(toTranslate, "ru");
                 call.enqueue(new Callback<Translation>() {
                     @Override
                     public void onResponse(Call<Translation> call, Response<Translation> response) {

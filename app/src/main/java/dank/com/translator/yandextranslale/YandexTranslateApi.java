@@ -10,8 +10,7 @@ public interface YandexTranslateApi {
 
 
     @GET("translate")
-    Call<Translation> translate(@Query("key") String apiKey,
-                                @Query("text") String text,
+    Call<Translation> translate(@Query("text") String text,
                                 @Query("lang") String lang);
 
 }
