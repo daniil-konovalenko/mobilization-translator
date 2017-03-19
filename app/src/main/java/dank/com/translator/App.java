@@ -10,6 +10,7 @@ public class App extends Application{
     private static final App ourInstance = new App();
     private static YandexTranslateApi api;
     private Retrofit retrofit;
+    private String BASE_URL = "https://translate.yandex.net/api/v1.5/tr.json/";
 
     public static App getInstance() {
         return ourInstance;
@@ -19,15 +20,13 @@ public class App extends Application{
     public void onCreate(){
         super.onCreate();
 
-        retrofit = new Retrofit.Builder().baseUrl("https://translate.yandex.net/api/v1.5/tr.json/").
-                addConverterFactory(GsonConverterFactory.create()).build();
+        retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
         api = retrofit.create(YandexTranslateApi.class);
     }
 
     public static YandexTranslateApi getApi() {
         return api;
     }
-
-
-
 }
