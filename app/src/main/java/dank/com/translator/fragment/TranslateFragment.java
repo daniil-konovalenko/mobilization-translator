@@ -44,18 +44,26 @@ public class TranslateFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String toTranslate = textToTranslateView.getText().toString();
-                Call<Translation> call = App.getApi().translate(toTranslate, "ru");
-                call.enqueue(new Callback<Translation>() {
-                    @Override
-                    public void onResponse(Call<Translation> call, Response<Translation> response) {
-                        String translated = response.body().getText().toString();
-                        translatedView.setText(translated);
-                    }
-                    @Override
-                    public void onFailure(Call<Translation> call, Throwable t) {
-                        translatedView.setText(getString(R.string.error, t.getMessage()));
-                    }
-                });
+                if (!toTranslate.isEmpty()) {
+                    Call<Translation> call = App.getApi().translate(toTranslate, "ru");
+                    call.enqueue(new Callback<Translation>() {
+                        @Override
+                        public void onResponse(Call<Translation> call, Response<Translation> response) {
+                            if (response.code() == 200) {
+                                String translated = response.body().getText().toString();
+                                translatedView.setText(translated);
+                            }
+                            else {
+                                translatedView.setText(getString(R.string.error, String.valueOf(response.code()) + response.toString()));
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Translation> call, Throwable t) {
+                            translatedView.setText(getString(R.string.error, t.getMessage()));
+                        }
+                    });
+                }
 
             }
         });
