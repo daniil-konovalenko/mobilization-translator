@@ -9,11 +9,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+
+import dank.com.translator.App;
 import dank.com.translator.R;
+import dank.com.translator.yandextranslale.model.Translation;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class TranslateFragment extends Fragment {
-
 
 
     public TranslateFragment() {
@@ -39,18 +44,31 @@ public class TranslateFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String toTranslate = textToTranslateView.getText().toString();
-                String translated = getTranslation(toTranslate);
-                translatedView.setText(translated);
+                if (!toTranslate.isEmpty()) {
+                    Call<Translation> call = App.getApi().translate(toTranslate, "ru");
+                    call.enqueue(new Callback<Translation>() {
+                        @Override
+                        public void onResponse(Call<Translation> call, Response<Translation> response) {
+                            if (response.code() == 200) {
+                                String translated = response.body().getText().toString();
+                                translatedView.setText(translated);
+                            }
+                            else {
+                                translatedView.setText(getString(R.string.error, String.valueOf(response.code()) + response.toString()));
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Translation> call, Throwable t) {
+                            translatedView.setText(getString(R.string.error, t.getMessage()));
+                        }
+                    });
+                }
+
             }
         });
 
         return view;
     }
 
-    // Stub method to retrieve "translated" string.
-    // To be replaced with call to Yandex.Translator API.
-
-    public String getTranslation(String string){
-        return "Translated: " + string;
-    }
 }
