@@ -6,8 +6,10 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import dank.com.translator.yandextranslale.YandexTranslateApi;
+import dank.com.translator.yandextranslale.model.LangsInfo;
 import dank.com.translator.yandextranslale.model.Translation;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -19,14 +21,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static junit.framework.Assert.*;
 
 public class YandexTranslateApiClientTest {
-    MockWebServer mockWebServer = new MockWebServer();
+    private MockWebServer mockWebServer = new MockWebServer();
 
-    Retrofit retrofit = new Retrofit.Builder()
+    private Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(mockWebServer.url("").toString())
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    YandexTranslateApi service = retrofit.create(YandexTranslateApi.class);
+    private YandexTranslateApi service = retrofit.create(YandexTranslateApi.class);
 
     @Test
     public void testTranslate() throws IOException {
@@ -49,13 +51,33 @@ public class YandexTranslateApiClientTest {
 
 
         Response<Translation> response = call.execute();
-        assertTrue(response != null);
+        assertNotNull(response);
         assertTrue(response.body().getCode() == 200);
         assertEquals(response.body().getText().get(0), "Здравствуй, Мир!");
         assertEquals(response.body().getLang(), "en-ru");
-        
+
         //Finish web server
         mockWebServer.shutdown();
+    }
+
+
+    @Test
+    public void testGetLangs() throws IOException {
+        mockWebServer.enqueue(new MockResponse().setBody("{\"dirs\":[\"az-ru\",\"be-bg\"]," +
+                "\"langs\":{\"af\":\"Африкаанс\",\"am\":\"Амхарский\"}}"));
+
+        Call<LangsInfo> call = service.getLangs("ru");
+
+        Response<LangsInfo> response = call.execute();
+        assertNotNull(response);
+        HashMap<String, String> expectedLangs = new HashMap<>();
+        expectedLangs.put("af", "Африкаанс");
+        expectedLangs.put("am", "Амхарский");
+
+        assertEquals(response.body().getLangs(), expectedLangs);
+
+        mockWebServer.shutdown();
+
     }
 
 }
